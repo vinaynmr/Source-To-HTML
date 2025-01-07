@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>sode2html</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-color:lightgrey;">
+<pre>
+<span class="preprocess_dir">#include</span><span class="header_file">&lt;stdio.h&gt;</span>
+<span class="preprocess_dir">#include</span><span class="header_file">&lt;string.h&gt;</span>
+
+<span class="comment">// Structure to store student details
+</span><span class="reserved_key1">struct</span> Student {
+    <span class="reserved_key1">int</span> id;
+    <span class="reserved_key1">char</span> name[<span class="numeric_constant">50</span>];
+    <span class="reserved_key1">float</span> marks;
+};
+
+<span class="comment">// Function prototypes
+</span><span class="reserved_key1">void</span> addStudent(<span class="reserved_key1">struct</span> Student students[], <span class="reserved_key1">int</span> *count);
+<span class="reserved_key1">void</span> displayStudents(<span class="reserved_key1">struct</span> Student students[], <span class="reserved_key1">int</span> count);
+<span class="reserved_key1">void</span> searchStudent(<span class="reserved_key1">struct</span> Student students[], <span class="reserved_key1">int</span> count);
+
+<span class="reserved_key1">int</span> main() {
+    <span class="reserved_key1">struct</span> Student students[<span class="numeric_constant">100</span>];
+    <span class="reserved_key1">int</span> count = <span class="numeric_constant">0</span>, choice;
+
+    <span class="reserved_key2">do</span> {
+        printf(<span class="string">"\nStudent Record Management System\n"</span>);
+        printf(<span class="string">"1. Add Student\n2. Display Students\n3. Search Student\n4. Exit\n"</span>);
+        printf(<span class="string">"Enter your choice: "</span>);
+        scanf(<span class="string">"%d"</span>, &choice);
+
+        <span class="reserved_key2">switch</span> (choice) {
+            <span class="reserved_key2">case</span> <span class="numeric_constant">1</span>:
+                addStudent(students, &count);
+                <span class="reserved_key2">break</span>;
+            <span class="reserved_key2">case</span> <span class="numeric_constant">2</span>:
+                displayStudents(students, count);
+                <span class="reserved_key2">break</span>;
+            <span class="reserved_key2">case</span> <span class="numeric_constant">3</span>:
+                searchStudent(students, count);
+                <span class="reserved_key2">break</span>;
+            <span class="reserved_key2">case</span> <span class="numeric_constant">4</span>:
+                printf(<span class="string">"Exiting program. Goodbye!\n"</span>);
+                <span class="reserved_key2">break</span>;
+            <span class="reserved_key2">default</span>:
+                printf(<span class="string">"Invalid choice! Please try again.\n"</span>);
+        }
+    } <span class="reserved_key2">while</span> (choice != <span class="numeric_constant">4</span>);
+
+    <span class="reserved_key2">return</span> <span class="numeric_constant">0</span>;
+}
+
+<span class="reserved_key1">void</span> addStudent(<span class="reserved_key1">struct</span> Student students[], <span class="reserved_key1">int</span> *count) {
+    printf(<span class="string">"\nEnter Student ID: "</span>);
+    scanf(<span class="string">"%d"</span>, &students[*count].id);
+    printf(<span class="string">"Enter Name: "</span>);
+    scanf(<span class="string">" %[^\n]s"</span>, students[*count].name); <span class="comment">// Read string with spaces
+</span>    printf(<span class="string">"Enter Marks: "</span>);
+    scanf(<span class="string">"%f"</span>, &students[*count].marks);
+    (*count)++;
+    printf(<span class="string">"Student added successfully!\n"</span>);
+}
+
+<span class="reserved_key1">void</span> displayStudents(<span class="reserved_key1">struct</span> Student students[], <span class="reserved_key1">int</span> count) {
+    printf(<span class="string">"\nList of Students:\n"</span>);
+    printf(<span class="string">"ID\tName\t\tMarks\n"</span>);
+    printf(<span class="string">"------------------------------\n"</span>);
+    <span class="reserved_key2">for</span> (<span class="reserved_key1">int</span> i = <span class="numeric_constant">0</span>; i < count; i++) {
+        printf(<span class="string">"%d\t%s\t\t%.2f\n"</span>, students[i].id, students[i].name, students[i].marks);
+    }
+}
+
+<span class="reserved_key1">void</span> searchStudent(<span class="reserved_key1">struct</span> Student students[], <span class="reserved_key1">int</span> count) {
+    <span class="reserved_key1">int</span> id, found = <span class="numeric_constant">0</span>;
+    printf(<span class="string">"\nEnter Student ID to search: "</span>);
+    scanf(<span class="string">"%d"</span>, &id);
+
+    <span class="reserved_key2">for</span> (<span class="reserved_key1">int</span> i = <span class="numeric_constant">0</span>; i < count; i++) {
+        <span class="reserved_key2">if</span> (students[i].id == id) {
+            printf(<span class="string">"Student Found: ID: %d, Name: %s, Marks: %.2f\n"</span>, students[i].id, students[i].name, students[i].marks);
+            found = <span class="numeric_constant">1</span>;
+            <span class="reserved_key2">break</span>;
+        }
+    }
+    <span class="reserved_key2">if</span> (!found) {
+        printf(<span class="string">"Student with ID %d not found.\n"</span>, id);
+    }
+}
+<span class="comment">/* this is multi-line comment */</span>
+</pre>
+</body>
+</html>
